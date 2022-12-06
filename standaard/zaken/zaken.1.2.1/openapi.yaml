@@ -5151,17 +5151,17 @@ components:
           type: string
           maxLength: 1000
     ResultaatHal:
-      allOf:
-        $ref: '#/components/schemas/ResultaatHalBasis'
-        properties:
-          _embedded:
-            $ref: '#/components/schemas/ResultaatEmbedded'
+          allOf:
+          - $ref: '#/components/schemas/ResultaatHalBasis'
+          - properties:
+              _embedded:
+                $ref: '#/components/schemas/ResultaatEmbedded'
     ResultaatHalBasis:
-      allOf:
-        $ref: '#/components/schemas/Resultaat'
-        properties:
-          _links:
-            $ref: '#/components/schemas/ResultaatLinks'
+          allOf:
+          - $ref: '#/components/schemas/Resultaat'
+          - properties:
+              _links:
+                $ref: '#/components/schemas/ResultaatLinks'
     ResultaatLinks:
       type: object
       properties: 
@@ -5314,12 +5314,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
         roltype:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
-    RolEmbedded:
-      type: object
-      properties:
-        roltype:
-          $ref: '#/components/schemas/RoltypeHalBasis'
-    
+
     VerblijfsAdres:
       required:
       - aoaIdentificatie
