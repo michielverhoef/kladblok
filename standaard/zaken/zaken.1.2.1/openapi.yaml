@@ -21,7 +21,7 @@ info:
 
     * Notificaties API
 
-    * Documenten API *(optioneel)*
+    * Documenten API *(optioneel|verplicht bij het gebruik van ZaakInformatieobject)*
 
     * Besluiten API *(optioneel)*
 
@@ -416,6 +416,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Resultaat'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ResultaatHalCollectie'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -969,6 +972,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Rol'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RolHalCollectie' 
+                     
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1108,6 +1115,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rol'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RolHal'                
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -1288,6 +1298,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Status'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/StatusHalCollectie'    
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1432,6 +1445,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/StatusHal'                
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -5150,6 +5166,20 @@ components:
           description: Een toelichting op wat het resultaat van de zaak inhoudt.
           type: string
           maxLength: 1000
+    ResultaatHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/ResultaatHalCollectieEmbedded'
+    ResultaatHalCollectieEmbedded:
+      type: object
+      properties:
+        resultaten:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultaatHal'
     ResultaatHal:
           allOf:
           - $ref: '#/components/schemas/ResultaatHalBasis'
@@ -5175,7 +5205,31 @@ components:
       type: object
       properties:
         resultaattype:
+          $ref: '#/components/schemas/ResultaattypeHalBasis'
+    ResultaattypeHalBasis:
+      allOf:
+      - $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/ztc/1.1.x/openapi.yaml#/components/schemas/ResultaatType'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/ResultaattypeLinks'
+    ResultaattypeLinks:
+      type: object
+      properties: 
+        self:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        zaaktype:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        resultaattypeomschrijving:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        selectielijstklasse:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        
     Rol:
       required:
       - zaak
@@ -5314,6 +5368,46 @@ components:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
         roltype:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+    RolHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/RolHalCollectieEmbedded'
+    RolHalCollectieEmbedded:
+      type: object
+      properties:
+        rollen:
+          type: array
+          items:
+            $ref: '#/components/schemas/RolHal'
+    RolHal:
+          allOf:
+          - $ref: '#/components/schemas/RolHalBasis'
+          - properties:
+              _embedded:
+                $ref: '#/components/schemas/RolEmbedded'
+    RolEmbedded:
+      type: object
+      properties:
+        roltype:
+          $ref: '#/components/schemas/RoltypeHalBasis'
+    RoltypeHalBasis:
+      allOf:
+      - $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/ztc/1.1.x/openapi.yaml#/components/schemas/RolType'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/RoltypeLinks'
+    RoltypeLinks:
+      type: object
+      properties: 
+        self:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        zaaktype:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
 
     VerblijfsAdres:
       required:
@@ -5674,6 +5768,47 @@ components:
             de status van een zaak.
           type: string
           maxLength: 1000
+    StatusHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/StatusHalCollectieEmbedded'
+    StatusHalCollectieEmbedded:
+      type: object
+      properties:
+        statussen:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusHal'
+    StatusHal:
+          allOf:
+          - $ref: '#/components/schemas/StatusHalBasis'
+          - properties:
+              _embedded:
+                $ref: '#/components/schemas/StatusEmbedded'
+    StatusEmbedded:
+      type: object
+      properties:
+        statustype:
+          $ref: '#/components/schemas/StatustypeHalBasis'
+    StatustypeHalBasis:
+      allOf:
+      - $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/ztc/1.1.x/openapi.yaml#/components/schemas/StatusType'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/StatustypeLinks'
+    StatustypeLinks:
+      type: object
+      properties: 
+        self:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        zaaktype:
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+          
     ZaakContactMoment:
       required:
       - zaak
