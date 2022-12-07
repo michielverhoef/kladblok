@@ -3448,6 +3448,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Zaak'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZaakHalCollectie'                      
         '400':
           $ref: '#/components/responses/400'
         '401':
