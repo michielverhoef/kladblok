@@ -7776,7 +7776,7 @@ components:
           type: array
           items: 
             $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'       
-        resultaat:
+        resultaten:
           $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
     ZaakHalCollectie:
       type: object
