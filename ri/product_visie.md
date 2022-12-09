@@ -1,3 +1,5 @@
+# NOG ONDERHANDEN!
+
 # Productvisie referentieimplementaties
 
 Om een goede referentie implementatie (RI) te maken moet duidelijk zijn wat het doel is, waar deze aan moet voldoen, wat de grenzen zijn en hoe een RI met deze grenzen om dient te gaan.
