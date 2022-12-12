@@ -20,4 +20,8 @@ De RI bevat ook alleen een implementatie van de standaard, geen extra functional
 
 Dit betekent dat een RI alleen de endpoints van de standaard implementeert. Verwijzingen naar of gebruik maken van bijvoorbeeld andere API's worden geacht te werken/beschikbaar te zijn en kunnen bijvoorbeeld gestubd worden. Het is voor een RI niet per se noodzakelijk gebruik te maken van deze andere API's. Denk aan bijvoorbeeld een Medewerkers API, Autorisaties API, Notificaties API etc. In een echte implementatie zal de beschikbaarheid van dergelijke API's noodzakelijk zijn om het systeem te laten werken. Voor een RI is dit niet het geval.
 
-==Omgaan met de referentieimplementatie 
+==Toolkeuze en afhankelijkheden 
+Een RI dient op Haven gedeployed te worden volgens de Haven standaard. Afgezien daarvan kan een RI onafhankelijk ontwikkeld en uitgerold worden. Er worden onder water geen onderlinge afhankelijkheden of gedeelde libraries gemaakt. Eventule code die in meer dan één RI gebruikt wordt dient in elke RI aanwezig te zijn. Dit lijkt om redundante code te gaan maar maakt het mogelijk om een RI te vervangen door een implementatie in een totaal andere taal of tool/framework.
+
+Er is geen verplichte taal of keuze voor een framework oid. Dit maakt het mogelijk om voor een specifieke RI een geschikte oplossing te maken of een bestaande RI eens te vervangen door één gemaakt in een compleet andere taal/tool. 
+
