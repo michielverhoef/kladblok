@@ -11,7 +11,7 @@ Het doel van de RI is tweeledig:
 
 Daarnaast is de RI open source en kan de code gebruikt worden om inspiratie op te doen voor een implementatie. NB. De RI is niet voorschrijvend. Het is dus niet verplicht om een implementatie of opslagstructuur/datamodel etc. uit de RI over te nemen. 
 
-De voorwaarden waaronder de RI gebruikt mag worden staan beschreven in de (gebruiksvoorwaarden)[https://vng-realisatie.github.io/gemma-zaken/beheer/gebruiksvoorwaarden]
+De voorwaarden waaronder de RI gebruikt mag worden staan beschreven in de [gebruiksvoorwaarden](https://vng-realisatie.github.io/gemma-zaken/beheer/gebruiksvoorwaarden])
 
 ## Grenzen van de referentieimplementatie
 De RI is een concept-implementatie van de API standaard zoals deze beschreven is de Open API specificatie en beschrijving van het gedragin de feature files. Er is dus niet geoptimaliseerd voor performance, robuustheid, betrouwbaarheid etc.
