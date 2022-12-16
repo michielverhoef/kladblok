@@ -3166,6 +3166,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObjectInformatieObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieObjectHalCollectie'
         '400':
           description: Bad request
           headers:
@@ -3478,6 +3481,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectInformatieObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ObjectInformatieObjectHal'
         '401':
           description: Unauthorized
           headers:
@@ -5078,6 +5084,46 @@ components:
             gebruik anders dan raadpleging
           type: string
           minLength: 1
+    ObjectInformatieObjectHalBasis:
+      allOf:
+      - $ref: '#/components/schemas/ObjectInformatieObject'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/ObjectInformatieObjectLinks'
+    ObjectInformatieObjectHal:
+      allOf:
+      - $ref: '#/components/schemas/ObjectInformatieObjectHalBasis'
+      - properties:
+          _embedded:
+            $ref: '#/components/schemas/ObjectInformatieObjectEmbedded'
+    ObjectInformatieObjectLinks:
+      type: object
+      properties: 
+        self:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        informatieobject:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        object:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+    ObjectInformatieObjectEmbedded:
+      type: object
+      properties: 
+        informatieobject:
+          $ref: '#/components/schemas/EnkelvoudigInformatieObjectHal'
+    ObjectInformatieObjectHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/ObjectInformatieObjectHalCollectieEmbedded'
+    ObjectInformatieObjectHalCollectieEmbedded:
+      type: object
+      properties:
+        objectinformatieobjecten:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectInformatieObjectHal'          
     ObjectInformatieObject:
       required:
       - informatieobject
