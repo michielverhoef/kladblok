@@ -1814,6 +1814,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ZaakInformatieObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZaakInformatieObjectHalCollectie'                  
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1956,6 +1959,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaakInformatieObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZaakInformatieObjectHal'         
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -2322,6 +2328,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ZaakObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZaakObjectHalCollectie'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2460,6 +2469,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaakObject'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZaakObjectHal'
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -5846,6 +5858,46 @@ components:
           format: uri
           maxLength: 1000
           minLength: 1
+    ZaakInformatieObjectHalBasis:
+      allOf:
+      - $ref: '#/components/schemas/ZaakInformatieObject'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/ZaakInformatieObjectLinks'
+    ZaakInformatieObjectHal:
+      allOf:
+      - $ref: '#/components/schemas/ZaakInformatieObjectHalBasis'
+      - properties:
+          _embedded:
+            $ref: '#/components/schemas/ZaakInformatieObjectEmbedded'
+    ZaakInformatieObjectLinks:
+      type: object
+      properties: 
+        self:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        informatieobject:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        zaak:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+    ZaakInformatieObjectEmbedded:
+      type: object
+      properties: 
+        zaak:
+          $ref: '#/components/schemas/ZaakHal'
+    ZaakInformatieObjectHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/ZaakInformatieObjectHalCollectieEmbedded'
+    ZaakInformatieObjectHalCollectieEmbedded:
+      type: object
+      properties:
+        zaakinformatieobjecten:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZaakInformatieObjectHal'
     ZaakInformatieObject:
       required:
       - informatieobject
@@ -5958,6 +6010,46 @@ components:
           maxLength: 100
           minLength: 1
       nullable: true
+    ZaakObjectHalBasis:
+      allOf:
+      - $ref: '#/components/schemas/ZaakObject'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/ZaakObjectLinks'
+    ZaakObjectHal:
+      allOf:
+      - $ref: '#/components/schemas/ZaakObjectHalBasis'
+      - properties:
+          _embedded:
+            $ref: '#/components/schemas/ZaakObjectEmbedded'
+    ZaakObjectLinks:
+      type: object
+      properties: 
+        self:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        zaak:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+        object:
+          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+    ZaakObjectEmbedded:
+      type: object
+      properties: 
+        zaak:
+          $ref: '#/components/schemas/ZaakHal'
+    ZaakObjectHalCollectie:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/HalPaginationLinks'
+        _embedded:
+          $ref: '#/components/schemas/ZaakObjectHalCollectieEmbedded'
+    ZaakObjectHalCollectieEmbedded:
+      type: object
+      properties:
+        zaakobjecten:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZaakObjectHal'      
     ZaakObject:
       required:
       - zaak
@@ -7770,17 +7862,17 @@ components:
           items: 
             $ref: '#/components/schemas/RolHalBasis'      
         status:
-          $ref: '#/components/schemas/StatusHalBasis'         
+          $ref: '#/components/schemas/StatusHalBasis'
         zaakinformatieobjecten:
           type: array
           items: 
-            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'       
+            $ref: '#/components/schemas/ZaakInformatieObjectHalBasis'
         zaakobjecten:
           type: array
           items: 
-            $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'       
+            $ref: '#/components/schemas/ZaakObjectHalBasis'
         resultaten:
-          $ref: 'https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink'
+          $ref: '#/components/schemas/ResultaatHalBasis'
     ZaakHalCollectie:
       type: object
       properties:
