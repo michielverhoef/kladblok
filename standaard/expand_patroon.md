@@ -47,8 +47,9 @@ Het is niet mogelijk om bijvoorbeeld bij een ROL de gegevens van de BETROKKENE o
 
 ## Uitwerking
 Op basis van de grenzen zijn de volgende versies van de API's voor Zaakgericht werken uitgewerkt met HAL:
-[Zaken API 1.2.1](zakenapi121.md)
-[Documenten API 1.1.1](documentenapi111.md)
+
+- [Zaken API 1.2.1](zakenapi121.md)
+- [Documenten API 1.1.1](documentenapi111.md)
 
 
 
