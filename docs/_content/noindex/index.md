@@ -1,4 +1,4 @@
 ---
 title: Demo NoIndex
-layout: default
+layout: subjects
 ---
