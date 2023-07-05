@@ -22,3 +22,6 @@
 - name: NoIndex
   link: /noindex/
   weight: 70
+- name: Introductie
+  link: /introductie/
+  weight: 80
