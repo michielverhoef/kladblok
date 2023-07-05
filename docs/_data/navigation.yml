@@ -19,3 +19,6 @@
 - name: Contact
   link: /contact/
   weight: 60
+- name: NoIndex
+  link: /noindex/
+  weight: 70
